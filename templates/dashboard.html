@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard Page</h1>
+    <p>Welcome, {{ session['user'] }}</p>
+    <a href="/upload_resume">
+        <button>Upload Resume</button>
+    </a>
+    <br><br><br>
+    <button><a href="/logout">Logout</a></button>
+    <br><br><br>
+    <form action="/delete_account" method="POST" onsubmit="return confirm('Are you sure you want to delete your account?');">
+        <button type="submit">Delete Account</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis</title>
+</head>
+<body>
+    <h1>Resume Analysis Result</h1>
+
+<h1>Resume Analysis Result</h1>
+
+<pre>{{ result }}</pre>
+
+<h2>ATS Score</h2>
+<p>{{ result.get('ats_score', 'Not Found') }}</p>
+
+<h2>Summary</h2>
+<p>{{ result.get('summary', 'Not Found') }}</p>
+
+<h2>Key Skills</h2>
+<ul>
+{% for skill in result.get('key_skills', []) %}
+<li>{{ skill }}</li>
+{% endfor %}
+</ul>
+
+<h2>Suggestions</h2>
+<ul>
+{% for item in result.get('suggestions', []) %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+<br>
+<a href="/upload_resume">Upload Another Resume</a>
+    <button><a href="/upload_resume">Upload Another Resume</a></button>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analysis</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .box {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .score {
+            background: #007bff;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .strengths { background: #d4edda; }
+        .weaknesses { background: #f8d7da; }
+        .suggestions { background: #fff3cd; }
+        .keywords { background: #e2e3e5; }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    {% if result.error %}
+        <div class="error_box">
+            <h2>Error</h2>
+            <p>{{ result.error }}</p>
+        </div>
+    {% else %}
+
+    <h2>Resume Analysis Result</h2>
+
+    <div class="box score">
+        ATS Score: {{ result.ats_score }}/100
+    </div>
+
+<h2>What's Good</h2>
+<ul>
+{% for item in result.whats_good %}
+    <li>{{ item }}</li>
+{% endfor %}
+</ul>
+
+<h2>Improvements to Reach 90+ ATS</h2>
+<ul>
+{% for item in result.improvements_to_reach_90_plus %}
+    <li>{{ item }}</li>
+{% endfor %}
+</ul>
+
+<h2>Job Description Match</h2>
+
+<p>SDE: {{ result.job_description_match.sde_role }}%</p>
+<p>Python Developer: {{ result.job_description_match.python_developer }}%</p>
+<p>AI/ML Engineer: {{ result.job_description_match.ai_ml_engineer }}%</p>
+{% endif %}
+    <a href="/upload_resume">
+        <button>Upload Another Resume</button>
+    </a>
+
+</div>
+
+</body>
+</html>

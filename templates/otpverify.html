@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTP Verification</title>
+</head>
+
+<body>
+    
+<h2>OTP Verification</h2>
+
+{% if error %}
+<p style="color:red;">{{error}}</p>
+{% endif %}
+
+<form action="/verify_otp" method="POST">
+
+<label>Enter OTP:</label>
+<input type="text" name="otp" required>
+
+<br><br>
+
+<button type="submit">Verify OTP</button>
+
+</form>
+
+<br>
+
+<form action="/resend_otp" method="POST">
+
+<button id="resendBtn" type="submit">Resend OTP</button>
+
+</form>
+
+<p id="timer"></p>
+
+
+<script>
+let timer = 30;
+
+function startTimer(){
+    let resendBtn = document.getElementById("resendBtn");
+    let timerText = document.getElementById("timer");
+
+    resendBtn.disabled = true;
+
+    let countdown = setInterval(function(){
+
+        timer--;
+        timerText.innerHTML = "Resend OTP in " + timer + " seconds";
+
+        if(timer <= 0){
+            clearInterval(countdown);
+            resendBtn.disabled = false;
+            timerText.innerHTML = "";
+        }
+
+    },1000);
+}
+
+window.onload = startTimer;
+</script>
+
+</body>
+</html>
+
