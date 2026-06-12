@@ -1,25 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reset Password | AI Resume Analyzer</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+}
+
+.container{
+    width:450px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:40px;
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.icon{
+    text-align:center;
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:10px;
+    font-size:2rem;
+}
+
+.subtitle{
+    text-align:center;
+    margin-bottom:30px;
+    opacity:0.9;
+    line-height:1.5;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:500;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:20px;
+    outline:none;
+    font-size:15px;
+}
+
+.reset-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#00c853;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.reset-btn:hover{
+    background:#00a844;
+    transform:translateY(-2px);
+}
+
+.error{
+    background:#ffebee;
+    color:#c62828;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.password-tips{
+    margin-top:20px;
+    font-size:14px;
+    opacity:0.9;
+}
+
+.password-tips p{
+    margin:5px 0;
+}
+
+@media(max-width:500px){
+
+    .container{
+        width:90%;
+        padding:30px;
+    }
+
+}
+
+</style>
+
 </head>
 <body>
+
+<div class="container">
+
+    <div class="icon">🔑</div>
+
     <h2>Reset Password</h2>
+
+    <p class="subtitle">
+        Create a new secure password for your account.
+    </p>
+
     {% if error %}
-        <p style="color: red;">{{ error }}</p>
+        <div class="error">
+            {{ error }}
+        </div>
     {% endif %}
+
     <form method="post" action="/reset">
-        <label for="password">New Password:</label>
-        <input type="password" id="password" name="password" placeholder="enter new password" required><br><br>
 
-        <label for="confirm_password">Confirm New Password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" placeholder="confirm new password" required><br><br>
+        <label>New Password</label>
 
-        <button type="submit">Reset Password</button>
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter new password"
+            required
+        >
+
+        <label>Confirm Password</label>
+
+        <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            placeholder="Confirm new password"
+            required
+        >
+
+        <button type="submit" class="reset-btn">
+            Reset Password
+        </button>
+
     </form>
 
+    <div class="password-tips">
+        <p>🔒 Use at least 8 characters</p>
+        <p>🔑 Include letters and numbers</p>
+        <p>🛡️ Avoid common passwords</p>
+    </div>
+
+</div>
 
 </body>
 </html>

@@ -3,43 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OTP Verification</title>
+<title>OTP Verification | AI Resume Analyzer</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+}
+
+.container{
+    width:420px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    padding:40px;
+    border-radius:20px;
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+.icon{
+    font-size:60px;
+    margin-bottom:10px;
+}
+
+h2{
+    margin-bottom:10px;
+    font-size:2rem;
+}
+
+.subtitle{
+    opacity:0.9;
+    margin-bottom:25px;
+    line-height:1.5;
+}
+
+.error{
+    background:#ffebee;
+    color:#c62828;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    text-align:center;
+    letter-spacing:4px;
+    outline:none;
+    margin-bottom:20px;
+}
+
+.verify-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#00c853;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.verify-btn:hover{
+    background:#00a844;
+    transform:translateY(-2px);
+}
+
+.resend-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#ff9800;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:15px;
+    transition:0.3s;
+}
+
+.resend-btn:hover{
+    background:#e68900;
+}
+
+.resend-btn:disabled{
+    background:#999;
+    cursor:not-allowed;
+}
+
+#timer{
+    margin-top:15px;
+    font-size:15px;
+    font-weight:500;
+}
+
+@media(max-width:500px){
+
+    .container{
+        width:90%;
+        padding:30px;
+    }
+
+}
+
+</style>
+
 </head>
 
 <body>
-    
-<h2>OTP Verification</h2>
 
-{% if error %}
-<p style="color:red;">{{error}}</p>
-{% endif %}
+<div class="container">
 
-<form action="/verify_otp" method="POST">
+    <div class="icon">🔐</div>
 
-<label>Enter OTP:</label>
-<input type="text" name="otp" required>
+    <h2>OTP Verification</h2>
 
-<br><br>
+    <p class="subtitle">
+        Enter the OTP sent to your registered email address.
+    </p>
 
-<button type="submit">Verify OTP</button>
+    {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+    {% endif %}
 
-</form>
+    <form action="/verify_otp" method="POST">
 
-<br>
+        <input
+            type="text"
+            name="otp"
+            placeholder="Enter OTP"
+            maxlength="6"
+            required
+        >
 
-<form action="/resend_otp" method="POST">
+        <button type="submit" class="verify-btn">
+            Verify OTP
+        </button>
 
-<button id="resendBtn" type="submit">Resend OTP</button>
+    </form>
 
-</form>
+    <form action="/resend_otp" method="POST">
 
-<p id="timer"></p>
+        <button id="resendBtn" class="resend-btn" type="submit">
+            Resend OTP
+        </button>
 
+    </form>
+
+    <p id="timer"></p>
+
+</div>
 
 <script>
+
 let timer = 30;
 
 function startTimer(){
+
     let resendBtn = document.getElementById("resendBtn");
     let timerText = document.getElementById("timer");
 
@@ -48,20 +189,28 @@ function startTimer(){
     let countdown = setInterval(function(){
 
         timer--;
-        timerText.innerHTML = "Resend OTP in " + timer + " seconds";
+
+        timerText.innerHTML =
+            "⏳ Resend OTP in " + timer + " seconds";
 
         if(timer <= 0){
+
             clearInterval(countdown);
+
             resendBtn.disabled = false;
-            timerText.innerHTML = "";
+
+            timerText.innerHTML =
+                "✅ You can now request a new OTP";
+
         }
 
     },1000);
+
 }
 
 window.onload = startTimer;
+
 </script>
 
 </body>
 </html>
-

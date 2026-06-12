@@ -1,18 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResumeUpload</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Resume | AI Resume Analyzer</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:40px;
+    text-align:center;
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.logo{
+    font-size:70px;
+    margin-bottom:10px;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+.subtitle{
+    opacity:0.9;
+    margin-bottom:30px;
+    line-height:1.6;
+}
+
+.upload-box{
+    border:3px dashed rgba(255,255,255,0.5);
+    border-radius:20px;
+    padding:40px;
+    margin-bottom:25px;
+    transition:0.3s;
+}
+
+.upload-box:hover{
+    background:rgba(255,255,255,0.1);
+}
+
+input[type="file"]{
+    width:100%;
+    padding:15px;
+    background:white;
+    border-radius:10px;
+    color:#333;
+    cursor:pointer;
+}
+
+.upload-btn{
+    background:#00c853;
+    color:white;
+    border:none;
+    padding:14px 35px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    margin-top:20px;
+}
+
+.upload-btn:hover{
+    background:#00a844;
+    transform:translateY(-2px);
+}
+
+.logout-btn{
+    display:inline-block;
+    margin-top:20px;
+    text-decoration:none;
+    background:#f44336;
+    color:white;
+    padding:12px 25px;
+    border-radius:12px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.logout-btn:hover{
+    background:#d32f2f;
+    transform:translateY(-2px);
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-top:30px;
+}
+
+.feature-card{
+    background:rgba(255,255,255,0.12);
+    padding:15px;
+    border-radius:12px;
+}
+
+.feature-card h3{
+    margin-bottom:8px;
+}
+
+.error{
+    background:#ffebee;
+    color:#c62828;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+@media(max-width:768px){
+
+    .container{
+        padding:25px;
+    }
+
+    .upload-box{
+        padding:25px;
+    }
+
+}
+
+</style>
 </head>
+
 <body>
-    <h1>Resume Upload</h1>
+
+<div class="container">
+
+    <div class="logo">📄</div>
+
+    <h1>AI Resume Analyzer</h1>
+
+    <p class="subtitle">
+        Upload your resume and get an ATS score, skill analysis,
+        keyword suggestions, and AI-powered recommendations instantly.
+    </p>
+
+    {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+    {% endif %}
+
     <form action="/upload_resume" method="post" enctype="multipart/form-data">
-        <input type="file" name="resume" accept=".pdf,.doc,.docx" required>
-        <br><br><br>
-        <button type="submit">Upload Resume</button>
-        <br><br><br>
-        <button><a href="/logout">Logout</a></button>
+
+        <div class="upload-box">
+
+            <h3>📤 Upload Resume</h3>
+            <br>
+
+            <input
+                type="file"
+                name="resume"
+                accept=".pdf,.doc,.docx"
+                required
+            >
+
+            <button type="submit" class="upload-btn">
+                Analyze Resume
+            </button>
+
+        </div>
+
     </form>
+
+    <a href="/logout" class="logout-btn">
+        Logout
+    </a>
+
+    <div class="features">
+
+        <div class="feature-card">
+            <h3>📊 ATS Score</h3>
+            <p>Estimate resume ATS compatibility.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🛠 Skills Analysis</h3>
+            <p>Identify strengths and gaps.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🎯 Suggestions</h3>
+            <p>Improve your resume instantly.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🤖 AI Powered</h3>
+            <p>Analysis using Groq LLM.</p>
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>

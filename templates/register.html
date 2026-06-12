@@ -1,23 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | AI Resume Analyzer</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+}
+
+.container{
+    width:420px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:40px;
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.logo{
+    text-align:center;
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:10px;
+    font-size:2rem;
+}
+
+.subtitle{
+    text-align:center;
+    margin-bottom:30px;
+    opacity:0.9;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:500;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:20px;
+    outline:none;
+    font-size:15px;
+}
+
+.register-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#00c853;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.register-btn:hover{
+    background:#00a844;
+    transform:translateY(-2px);
+}
+
+.links{
+    text-align:center;
+    margin-top:20px;
+}
+
+.links a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.links a:hover{
+    text-decoration:underline;
+}
+
+.error{
+    background:#ffebee;
+    color:#c62828;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:15px;
+    text-align:center;
+}
+
+.features{
+    margin-top:25px;
+    font-size:14px;
+    opacity:0.9;
+}
+
+.features p{
+    margin:5px 0;
+}
+
+@media(max-width:500px){
+
+    .container{
+        width:90%;
+        padding:30px;
+    }
+
+}
+
+</style>
+
 </head>
 <body>
-    <h2>Register</h2>
+
+<div class="container">
+
+    <div class="logo">🚀</div>
+
+    <h2>Create Account</h2>
+
+    <p class="subtitle">
+        Join AI Resume Analyzer and optimize your resume with AI.
+    </p>
+
     {% if error %}
-        <p style="color: red;">{{ error }}</p>
+        <div class="error">
+            {{ error }}
+        </div>
     {% endif %}
-        
+
     <form method="post">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Register</button>
+
+        <label>Email Address</label>
+
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Create a password"
+            required
+        >
+
+        <button type="submit" class="register-btn">
+            Register
+        </button>
+
     </form>
-    <p><a href="/login">Already have an account? Login here.</a></p>
+
+    <div class="links">
+
+        <p>
+            Already have an account?
+            <a href="/login">
+                Login Here
+            </a>
+        </p>
+
+    </div>
+
+    <div class="features">
+        <p>📄 Resume Parsing</p>
+        <p>📊 ATS Score Analysis</p>
+        <p>🎯 AI Suggestions</p>
+        <p>🔍 Missing Keyword Detection</p>
+    </div>
+
+</div>
+
 </body>
 </html>
